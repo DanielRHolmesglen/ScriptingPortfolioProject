@@ -6,6 +6,7 @@ using UnityEngine;
 /// </summary>
 public class ShaderInteractions : MonoBehaviour
 {
+    
     public void ShaderInteractionOne()
     {
         Debug.Log("interaction one");
