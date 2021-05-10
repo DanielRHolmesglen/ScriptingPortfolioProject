@@ -5,7 +5,7 @@ using UnityEngine;
 public class LauncherController : MonoBehaviour
 {
     [SerializeField] float speed = 100;
-    [SerializeField] GameObject bomb;
+    [SerializeField] GameObject bomb, block;
     [SerializeField] Transform spawnPoint;
 
     // Update is called once per frame
@@ -20,6 +20,10 @@ public class LauncherController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Instantiate(bomb, spawnPoint.position, spawnPoint.rotation);
+        }
+        if (Input.GetMouseButtonDown(1))
+        {
+            Instantiate(block, spawnPoint.position, spawnPoint.rotation);
         }
     }
 
