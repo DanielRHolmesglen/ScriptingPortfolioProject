@@ -46,7 +46,7 @@ public class AIPatrol : MonoBehaviour
             Debug.Log("waiting...");
 
             yield return new WaitForSeconds(2.0f);
-
+    
             Debug.Log("...boooooooooooored");
             currentState = States.PATROL;
             yield return null;

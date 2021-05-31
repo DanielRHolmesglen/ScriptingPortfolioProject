@@ -2279,11 +2279,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1578329807}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3f5e54b1f8222242ab795e1619a8c72, type: 3}
+  m_Script: {fileID: 11500000, guid: 4af2e2c09578e3849ada2a632e45a393, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sightRange: 10
-  attackRange: 1
 --- !u!4 &1578329810
 Transform:
   m_ObjectHideFlags: 0

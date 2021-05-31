@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class StateMachineBuilder
 {
     private string _startState;
 
-    private readonly Dictionary<string, Func<StateMachine, UnityEngine.YieldInstruction>> _states =
-        new Dictionary<string, Func<StateMachine, UnityEngine.YieldInstruction>>();
+    private readonly Dictionary<string, Func<StateMachine, IEnumerator>> _states =
+        new Dictionary<string, Func<StateMachine, IEnumerator>>();
 
     public StateMachineBuilder RegisterState(string stateName,
-        Func<StateMachine, UnityEngine.YieldInstruction> stateFunc)
+        Func<StateMachine, IEnumerator> stateFunc)
     {
         if (_states.ContainsKey(stateName))
         {
@@ -41,36 +42,35 @@ public class StateMachineBuilder
         return this;
     }
 
-    public IEnumerator Build()
+    public StateMachine Build()
     {
         if (_startState is null)
         {
             throw new InvalidOperationException("No states have been registered.");
         }
-
-        var machine = new StateMachine(_startState, _states);
-
-        return machine.Run();
+        
+        return new StateMachine(_startState, _states);
     }
 }
 
 public class StateMachine
 {
-    private Func<StateMachine, UnityEngine.YieldInstruction> _currentState;
-    private readonly Dictionary<string, Func<StateMachine, UnityEngine.YieldInstruction>> _states;
+    public Func<StateMachine, IEnumerator> CurrentState { get; private set; }
+
+    private readonly Dictionary<string, Func<StateMachine, IEnumerator>> _states;
 
     internal StateMachine(string startState,
-        Dictionary<string, Func<StateMachine, UnityEngine.YieldInstruction>> states)
+        Dictionary<string, Func<StateMachine, IEnumerator>> states)
     {
         _states = states;
-        _currentState = states[startState];
+        CurrentState = states[startState];
     }
 
     public void Transition(string stateName)
     {
         if (_states.TryGetValue(stateName, out var func))
         {
-            _currentState = func;
+            CurrentState = func;
         }
         else
         {
@@ -78,11 +78,19 @@ public class StateMachine
         }
     }
 
-    internal IEnumerator Run()
+    protected internal IEnumerator Run(MonoBehaviour behaviour)
     {
         while (true)
         {
-            yield return _currentState(this);
+            yield return behaviour.StartCoroutine(CurrentState(this));
         }
     }
 }
+
+public static class StateMachineExtensions
+{
+    public static void RunStateMachine(this MonoBehaviour behaviour, StateMachine machine)
+    {
+        behaviour.StartCoroutine(machine.Run(behaviour));
+    }
+} 
