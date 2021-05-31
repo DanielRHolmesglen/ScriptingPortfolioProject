@@ -1354,6 +1354,7 @@ GameObject:
   - component: {fileID: 1845844926}
   - component: {fileID: 1845844925}
   - component: {fileID: 1845844923}
+  - component: {fileID: 1845844924}
   m_Layer: 9
   m_Name: Vortex
   m_TagString: Untagged
@@ -1371,6 +1372,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 907f6a5975f74c228ea10c05c6ae0cd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1845844924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1845844922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a9663015dea5a64a8e11bffad935fc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!23 &1845844925
@@ -1426,7 +1439,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1845844922}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.68, z: -5.9}
+  m_LocalPosition: {x: 0, y: 1.5, z: -5.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
